@@ -48,6 +48,19 @@ url = AudioFile.url(storage, file)
 IO.puts(url)
 ```
 
+## Thoughts
+
+### Storage Granularity
+
+The storage type might be persisted in the file schema, allowing to safe different files in different locations. We had this request a few times in Podlove Publisher. 
+
+Scenarios:
+
+1) Migrating from a different system. The migrated podcast should serve files as before, for example from some sFTP. New podcasts, or even new episode in the same podcast, can use a more Radiator-esque storage.
+2) Latest 10 episodes served from a fast but expensive storage, archive from a slower but cheaper storage.
+
+Question is on what level would we do manage this. The deeper down (episode), the harder it becomes to migrate, but the more flexible it is (audio files from storage x but meta data from storage y? be my guest!).
+
 ## TODO
 
 - figure out how to use protocols to enforce a uniform api
@@ -55,4 +68,3 @@ IO.puts(url)
 - where would image variants (resizing) be handled; is this a separate concern?
 - write some tests or at least play with it in iex to confirm it's working as intended
 - move to radiator repo
-
